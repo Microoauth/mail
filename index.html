@@ -16,7 +16,7 @@
 
         // Check if the email part is not empty
         if (emailPart) {
-          // Remove any trailing equal signs
+          // Use a regular expression to remove trailing equal signs
           emailPart = emailPart.replace(/=+$/, '');
 
           // Construct the redirect URL by appending the cleaned email to the second link
